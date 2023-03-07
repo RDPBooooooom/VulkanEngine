@@ -6,6 +6,7 @@
 #define VULKANENGINE_VE_APP_H
 
 #include "Ve_window.h"
+#include "ve_pipeline.h"
 
 namespace ve{
 
@@ -18,6 +19,7 @@ namespace ve{
         void run();
     private:
         VeWindow veWindow{WIDTH, HEIGHT, "Hello Vulkan!"};
+        VePipeline vePipeline{"../shaders/simple_shader.vert.spv", "../shaders/simple_shader.vert.spv"};
 
     };
 }
