@@ -8,8 +8,9 @@
 
 namespace ve {
 
-    VePipeline::VePipeline(const std::string &vertFilepath, const std::string &fragFilepath) {
-        createGraphicsPipeline(vertFilepath, fragFilepath);
+    VePipeline::VePipeline(VeDevice &veDevice, const std::string &vertFilepath, const std::string &fragFilepath, const PipelineConfigInfo configInfo)
+            : veDevice(veDevice) {
+        createGraphicsPipeline(vertFilepath, fragFilepath, configInfo);
     }
 
     std::vector<char> VePipeline::readFile(const std::string &filepath) {
@@ -30,13 +31,29 @@ namespace ve {
         return buffer;
     }
 
-    void VePipeline::createGraphicsPipeline(const std::string &vertFilepath, const std::string &fragFilepath) {
+    void VePipeline::createGraphicsPipeline(const std::string &vertFilepath, const std::string &fragFilepath, const PipelineConfigInfo configInfo) {
 
         auto vertCode = readFile(vertFilepath);
         auto fragCode = readFile(fragFilepath);
 
         std::cout << "Vertex Shader Code Size: " << vertCode.size() << '\n';
         std::cout << "Fragment Shader Code Size: " << fragCode.size() << '\n';
+    }
+
+    void VePipeline::createShaderModule(const std::vector<char> &code, VkShaderModule *shaderModule) {
+        VkShaderModuleCreateInfo createInfo{};
+        createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+        createInfo.codeSize = code.size();
+        createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
+
+        if(vkCreateShaderModule(veDevice.device(), &createInfo, nullptr, shaderModule) != VK_SUCCESS){
+            throw std::runtime_error("failed to create shader module");
+        }
+    }
+
+    PipelineConfigInfo VePipeline::defaultPipelineConfigInfo(uint32_t width, uint32_t height) {
+        PipelineConfigInfo configInfo{};
+        return configInfo;
     }
 
 

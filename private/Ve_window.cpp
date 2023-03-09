@@ -1,6 +1,7 @@
 //
 // Created by marvi on 07.03.2023.
 //
+#include <stdexcept>
 #include "Ve_window.h"
 
 namespace ve {
@@ -23,5 +24,11 @@ namespace ve {
 
     bool VeWindow::shouldClose() {
         return glfwWindowShouldClose(window);
+    }
+
+    void VeWindow::createWindowSurface(VkInstance instance, VkSurfaceKHR *surface) {
+        if(glfwCreateWindowSurface(instance, window, nullptr, surface) != VK_SUCCESS){
+            throw std::runtime_error("Failed to create window surface");
+        }
     }
 }

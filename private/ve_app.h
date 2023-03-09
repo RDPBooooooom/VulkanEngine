@@ -7,6 +7,7 @@
 
 #include "Ve_window.h"
 #include "ve_pipeline.h"
+#include "ve_device.hpp"
 
 namespace ve{
 
@@ -19,7 +20,8 @@ namespace ve{
         void run();
     private:
         VeWindow veWindow{WIDTH, HEIGHT, "Hello Vulkan!"};
-        VePipeline vePipeline{"../shaders/simple_shader.vert.spv", "../shaders/simple_shader.vert.spv"};
+        VeDevice veDevice{veWindow};
+        VePipeline vePipeline{veDevice, "../shaders/simple_shader.vert.spv", "../shaders/simple_shader.frag.spv", VePipeline::defaultPipelineConfigInfo(WIDTH, HEIGHT)};
 
     };
 }

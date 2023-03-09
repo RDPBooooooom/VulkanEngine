@@ -3,7 +3,7 @@ project(VulkanEngine)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(${PROJECT_NAME} main.cpp private/Ve_window.h private/Ve_window.cpp private/ve_app.cpp private/ve_app.h private/ve_pipeline.cpp private/ve_pipeline.h)
+add_executable(${PROJECT_NAME} main.cpp private/Ve_window.h private/Ve_window.cpp private/ve_app.cpp private/ve_app.h private/ve_pipeline.cpp private/ve_pipeline.h private/ve_device.hpp private/ve_device.cpp)
 
 #           DOWNLOAD ALL THE SUBMODULES
 find_package(Git QUIET)

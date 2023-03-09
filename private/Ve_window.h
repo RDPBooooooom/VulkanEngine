@@ -6,7 +6,10 @@
 #define VULKANENGINE_VE_WINDOW_H
 
 #include <string>
+
+#define GLFW_INCLUDE_VULKAN
 #include "GLFW/glfw3.h"
+#include "vulkan/vulkan_core.h"
 
 namespace ve {
 
@@ -20,6 +23,8 @@ namespace ve {
         VeWindow &operator=(const VeWindow &) = delete;
 
         bool shouldClose();
+
+        void createWindowSurface(VkInstance instance, VkSurfaceKHR *surface);
 
     private:
 
